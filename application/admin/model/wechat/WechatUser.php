@@ -199,6 +199,7 @@ use service\SystemConfigService;
                 ->setExcelContent($export)
                 ->ExcelSave();
         }
+
         return self::page($model,function ($item){
             $item['qr_code'] = QrcodeService::getForeverQrcode('spread',$item['uid'])?:'';
             $item['extract_count_price'] = UserExtract::getUserCountPrice($item['uid']);//累计提现

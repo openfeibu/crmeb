@@ -41,6 +41,7 @@ class AgentManage extends AuthController
         $this->assign([
             'where'=>$where,
         ]);
+
         $limitTimeList = [
             'today'=>implode(' - ',[date('Y/m/d'),date('Y/m/d',strtotime('+1 day'))]),
             'week'=>implode(' - ',[
@@ -59,6 +60,7 @@ class AgentManage extends AuthController
         $uidAll = UserModel::getAll($where);
         $this->assign(compact('limitTimeList','uidAll'));
         $this->assign(UserModel::agentSystemPage($where));
+
         return $this->fetch();
     }
 

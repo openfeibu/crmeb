@@ -67,4 +67,22 @@ class StoreCategory extends ModelBasic
             return self::del($id);
         }
     }
+    public static function CategoryList($where)
+    {
+        $model = new self;
+        if($where['pid'] != '')  $model = $model->where('pid',$where['pid']);
+        else if($where['pid']=='' && $where['cate_name']=='') $model = $model->where('pid',0);
+        if($where['is_show'] != '')  $model = $model->where('is_show',$where['is_show']);
+        if($where['cate_name'] != '')  $model = $model->where('cate_name','LIKE',"%$where[cate_name]%");
+        $data=($data=$model->select()) && count($data) ? $data->toArray():[];
+        foreach ($data as &$item){
+            if($item['pid']){
+                $item['pid_name'] = self::where('id',$item['pid'])->value('cate_name');
+            }else{
+                $item['pid_name'] = '顶级';
+            }
+        }
+        $count = $model->count();
+        return compact('count','data');
+    }
 }

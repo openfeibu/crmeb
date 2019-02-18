@@ -30,6 +30,21 @@ class StoreCategory extends AuthController
     {
         $this->assign('pid',$this->request->get('pid',0));
         $this->assign('cate',CategoryModel::getTierList());
+
+        $where = Util::getMore([
+            ['is_show',''],
+            ['pid',$this->request->param('pid','')],
+            ['cate_name',''],
+            ['page',1],
+            ['limit',20],
+            ['order','']
+        ]);
+        $this->assign('where',$where);
+//        $list = CategoryModel::CategoryList($where);
+//        $this->assign('list',$list['data']);
+//        $this->assign('total',$list['count']);
+
+        $this->assign(CategoryModel::systemPage($where));
         return $this->fetch();
     }
     /*
