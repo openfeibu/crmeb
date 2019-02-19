@@ -128,6 +128,7 @@ class StoreSeckill extends AuthController
         ],$request);
         if(!$data['title']) return Json::fail('请输入产品标题');
         if(!$data['unit_name']) return Json::fail('请输入产品单位');
+        if(!$data['product_id']) return Json::fail('产品ID不能为空');
 //        var_dump($this->request->post());
         if(count($data['section_time'])<1) return Json::fail('请选择活动时间');
         $data['start_time'] = strtotime($data['section_time'][0]);

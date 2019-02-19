@@ -30,7 +30,7 @@ class StoreCategory extends AuthController
     {
         $this->assign('pid',$this->request->get('pid',0));
         $this->assign('cate',CategoryModel::getTierList());
-
+/*
         $where = Util::getMore([
             ['is_show',''],
             ['pid',$this->request->param('pid','')],
@@ -45,6 +45,7 @@ class StoreCategory extends AuthController
 //        $this->assign('total',$list['count']);
 
         $this->assign(CategoryModel::systemPage($where));
+*/
         return $this->fetch();
     }
     /*
