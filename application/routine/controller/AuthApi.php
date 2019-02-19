@@ -1690,7 +1690,7 @@ class AuthApi extends AuthController{
         if(!$uni || !($order = StoreOrder::getUserOrderDetail($uid,$uni))) return JsonService::fail('查询订单不存在!');
         if($order['delivery_type'] != 'express' || !$order['delivery_id']) return JsonService::fail('该订单不存在快递单号!');
         $cacheName = $uni.$order['delivery_id'];
-        CacheService::rm($cacheName);
+        //CacheService::rm($cacheName);
         $result = CacheService::get($cacheName,null);
         if($result === NULL){
             $result = Express::query($order['delivery_id']);
