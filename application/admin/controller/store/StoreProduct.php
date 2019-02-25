@@ -16,6 +16,7 @@ use service\UploadService as Upload;
 use think\Request;
 use app\admin\model\store\StoreCategory as CategoryModel;
 use app\admin\model\store\StoreProduct as ProductModel;
+use app\admin\model\store\StoreProductType as ProductTypeModel;
 use think\Url;
 
 use app\admin\model\system\SystemAttachment;
@@ -360,7 +361,8 @@ class StoreProduct extends AuthController
         if(!$id) return $this->failed('数据不存在!');
         $result = StoreProductAttrResult::getResult($id);
         $image = ProductModel::where('id',$id)->value('image');
-        $this->assign(compact('id','result','product','image'));
+        $type_list = ProductTypeModel::select();
+        $this->assign(compact('id','result','product','image','type_list'));
         return $this->fetch();
     }
     /**

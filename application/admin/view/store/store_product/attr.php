@@ -63,7 +63,14 @@
                 <i-Col style="position: relative;margin-right: 6px"  span="5"
                        v-for="(item, index) in items"
                        :key="index">
-                    <i-Input type="text" v-model="item.value" placeholder="设置名称"></i-Input>
+<!--                    <i-Input type="text" v-model="item.value" placeholder="设置名称"></i-Input>-->
+
+                    <i-select v-model="item.value" placeholder="设置名称">
+                        {volist name="type_list" id="type"}
+                        <i-option value="{$type.type_name}">{$type.type_name}</i-option>
+                        {/volist}
+                    </i-select>
+
                     <i-Button style="position: absolute;top:0;right:0;margin-top:1px;border: none;font-size: 8px;line-height: 1.8" type="ghost" @click="handleRemove(index)" v-show="item.attrHidden == true"><Icon type="close-round" /></i-Button>
                     <i-Button style="position: absolute;top:0;right:0;margin-top:1px;border: none;font-size: 8px;line-height: 1.8" type="ghost" @click="attrHiddenBool(item)" v-show="item.attrHidden == false"><Icon type="checkmark-round"></Icon></i-Button>
                 </i-Col>
@@ -225,6 +232,26 @@
                     }else{
                         item.attrHidden = true;
                     }
+                    var url= "{:Url('store.store_product_type/attribute_all')}?type_name="+item.value;
+                    var list = [];
+                    $.ajax({
+                        url : url,
+                        data : {},
+                        type : 'get',
+                        success : function (data) {
+                            var jsonarray = eval('('+data+')');
+                            console.log(jsonarray);
+                            for(var i = 0; i < jsonarray.length; i++){
+                                list.push({'value':jsonarray[i].attr_name,"detailValue":"","attrHidden":true,"detail":jsonarray[i].attr_value_arr});
+                            }
+                            console.log(list);
+
+                        },
+                        error : function (jqXHR, textStatus, errorThrown) {
+
+                        }
+                    });
+                    this.items = list;
                 },
                 hiddenBool(){
                     this.hidden = true;
