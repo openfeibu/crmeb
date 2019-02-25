@@ -241,12 +241,12 @@
                         success : function (data) {
                             //var jsonarray = eval('('+data+')');
                             var jsonarray = JSON.parse(data);
-                            console.log(jsonarray[0].attr_value_arr);
+                            console.log(jsonarray);
                             for(var i = 0; i < jsonarray.length; i++){
-                                var attr_value_text = jsonarray[i].attr_value_text;
-                                var attr_value_arr = attr_value_text.split(',');
-                                list.push({'value':jsonarray[i].attr_name,"detailValue":"","attrHidden":true,"detail":attr_value_arr});
-                                console.log('attr_value_arr:'+attr_value_arr);
+                               // var attr_value_text = jsonarray[i].attr_value_text;
+                               // var attr_value_arr = attr_value_text.split(',');
+                                list.push({'value':jsonarray[i].attr_name,"detailValue":"","attrHidden":true,"detail":jsonarray[i].attr_value_arr});
+                                console.log('attr_value_arr:'+jsonarray[i].attr_value_arr);
                             }
                             console.log(list);
 

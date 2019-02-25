@@ -39,7 +39,7 @@ class StoreAttribute extends ModelBasic
         $data = ($data=$model->select()) && count($data) ? $data->toArray() :[];
         foreach ($data as $key => &$item){
             $item['type_name'] = ProductTypeModel::where('id',$item['type_id'])->value('type_name');
-            $data[$key]['attr_value_arr'] = explode(PHP_EOL, $item['attr_values']);
+            $data[$key]['attr_value_arr'] = explode('n', $item['attr_values']);
             $data[$key]['attr_value_text'] = implode(',', $data[$key]['attr_value_arr']);
         }
 
