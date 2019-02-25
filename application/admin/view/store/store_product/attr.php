@@ -239,10 +239,12 @@
                         data : {},
                         type : 'get',
                         success : function (data) {
-                            var jsonarray = eval('('+data+')');
-                            console.log(jsonarray);
+                            //var jsonarray = eval('('+data+')');
+                            var jsonarray = JSON.parse(data);
+                            console.log(jsonarray[0].attr_value_arr);
                             for(var i = 0; i < jsonarray.length; i++){
                                 list.push({'value':jsonarray[i].attr_name,"detailValue":"","attrHidden":true,"detail":jsonarray[i].attr_value_arr});
+                                console.log(jsonarray[i].attr_value_arr.length);
                             }
                             console.log(list);
 
