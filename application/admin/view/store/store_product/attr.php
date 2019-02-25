@@ -246,7 +246,7 @@
                                 var attr_value_text = jsonarray[i].attr_value_text;
                                 var attr_value_arr = attr_value_text.split(',');
                                 list.push({'value':jsonarray[i].attr_name,"detailValue":"","attrHidden":true,"detail":attr_value_arr});
-                                console.log(attr_value_arr.length);
+                                console.log('attr_value_arr:'+attr_value_arr);
                             }
                             console.log(list);
 
