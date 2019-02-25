@@ -278,13 +278,17 @@
             var value = obj.value //得到修改后的值
                 ,data = obj.data //得到所在行所有键值
                 ,field = obj.field; //得到字段
-            switch (field){
-                case name:
-                    successFn && successFn(obj);
-                    break;
-                default:
-                    console.log('未检测到指定字段'+name);
-                    break;
+            if (typeof name == "function") {
+                name && name(obj);
+            }else{
+                switch (field){
+                    case name:
+                        successFn && successFn(obj);
+                        break;
+                    default:
+                        console.log('未检测到指定字段'+name);
+                        break;
+                }
             }
         });
     }
