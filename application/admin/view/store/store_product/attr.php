@@ -240,7 +240,7 @@
                         type : 'get',
                         success : function (data) {
                             //var jsonarray = eval('('+data+')');
-                            var jsonarray = JSON.parse(data);
+                            var jsonarray = $.parseJSON(data);
                             console.log(jsonarray[0].attr_value_arr);
                             for(var i = 0; i < jsonarray.length; i++){
                                 list.push({'value':jsonarray[i].attr_name,"detailValue":"","attrHidden":true,"detail":jsonarray[i].attr_value_arr});
