@@ -220,6 +220,10 @@ class StoreOrder extends ModelBasic
             $deductionPrice = 0;
             $usedIntegral = 0;
         }
+        $userInfo = User::getUserInfo($uid);
+        if($userInfo['now_money'] < $payPrice)
+            return self::setErrorInfo('余额不足'.floatval($payPrice));
+
         if(!$res2) return self::setErrorInfo('使用积分抵扣失败!');
 
         $cartIds = [];
