@@ -128,7 +128,7 @@ class AuthApi extends AuthController{
         $model = StoreProduct::validWhere();
         if($_GET){$data = $_GET['value'];
             if($data!=''){
-                $model = $model->where('store_name','LIKE',"%$data%")->whereOr('keyword','LIKE',"%$data%");
+                $model = $model->where('is_show',1)->where('is_del',0)->where('store_name','LIKE',"%$data%")->whereOr('keyword','LIKE',"%$data%");
                 if((int)$data) $model = $model->whereOr('id',$data);
             }
             $list = $model->field('id,store_name,cate_id,image,sales,price,stock')->select()->toArray();
